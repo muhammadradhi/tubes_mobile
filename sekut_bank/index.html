@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Total Saldo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="sekut_bank.png" alt="Sekut Bank" class="logo">
+  </header>
+
+  <main class="container">
+    <section class="card saldo-card">
+      <h1>TOTAL SALDO</h1>
+      <p class="saldo" id="saldo">Rp 0</p>
+    </section>
+
+    <section class="aksi">
+      <div class="mode-buttons">
+        <button type="button" class="card mode-btn" id="btn-tambah" data-mode="tambah">tambah saldo</button>
+        <button type="button" class="card mode-btn" id="btn-kurang" data-mode="kurang">kurangi saldo</button>
+      </div>
+
+      <input type="text" id="nominal" class="card input-nominal" placeholder="Masukkan nominal...." inputmode="numeric" autocomplete="off">
+      <p class="pesan" id="pesan" role="alert"></p>
+
+      <button type="button" class="btn-konfirmasi" id="btn-konfirmasi">konfirmasi</button>
+    </section>
+
+    <section class="card riwayat">
+      <h2>Riwayat Transaksi</h2>
+      <div class="tabel-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nominal</th>
+              <th>Waktu</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="riwayat-body"></tbody>
+        </table>
+        <p class="kosong" id="kosong" hidden>Belum ada transaksi.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
