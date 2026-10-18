@@ -6,9 +6,9 @@
   var data = {
     saldo: 1000000,
     riwayat: [
-      { nominal: 100000, waktu: "23:53, 16/10/2026", status: "tambah saldo" },
-      { nominal: 90000, waktu: "14:32, 16/10/2026", status: "tarik saldo" },
-      { nominal: 6000, waktu: "09:13, 16/10/2026", status: "tambah saldo" }
+      { nominal: 100000, waktu: "23:53, 16/10/2026", keterangan: "dari rekening BCA Alex", status: "tambah saldo" },
+      { nominal: 90000, waktu: "14:32, 16/10/2026", keterangan: "QR makan", status: "tarik saldo" },
+      { nominal: 6000, waktu: "09:13, 16/10/2026", keterangan: "gaji", status: "tambah saldo" }
     ]
   };
 
@@ -59,6 +59,30 @@
     return parseInt(teks.replace(/\D/g, ""), 10) || 0;
   }
 
+  // Mirip random.choice() di Python
+  function acak(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function buatKeterangan(jenis) {
+    var bank = ["BCA", "BRI", "BNI", "Mandiri", "BSI", "CIMB"];
+    var nama = ["Alex", "Budi", "Citra", "Dewi", "Eko", "Fajar", "Gita", "Rina"];
+    var qr = ["makan", "kopi", "bensin", "belanja", "parkir", "jajan", "ojek"];
+    var sumberMasuk = ["gaji", "transferan teman", "bayar utang", "cashback", "hadiah"];
+
+    if (jenis === "tambah") {
+      if (Math.random() < 0.5) {
+        return "dari rekening " + acak(bank) + " " + acak(nama);
+      }
+      return acak(sumberMasuk);
+    }
+
+    if (Math.random() < 0.5) {
+      return "rekening " + acak(bank) + " " + acak(nama);
+    }
+    return "QR " + acak(qr);
+  }
+
   function tampilPesan(teks, sukses) {
     elPesan.textContent = teks;
     elPesan.classList.toggle("sukses", !!sukses);
@@ -79,6 +103,10 @@
       tdWaktu.setAttribute("data-label", "Waktu");
       tdWaktu.textContent = item.waktu;
 
+      var tdKet = document.createElement("td");
+      tdKet.setAttribute("data-label", "Keterangan");
+      tdKet.textContent = item.keterangan || "-";
+
       var tdStatus = document.createElement("td");
       tdStatus.setAttribute("data-label", "Status");
       var badge = document.createElement("span");
@@ -88,6 +116,7 @@
 
       tr.appendChild(tdNominal);
       tr.appendChild(tdWaktu);
+      tr.appendChild(tdKet);
       tr.appendChild(tdStatus);
       elBody.appendChild(tr);
     });
@@ -123,6 +152,7 @@
     data.riwayat.unshift({
       nominal: nominal,
       waktu: formatWaktu(new Date()),
+      keterangan: buatKeterangan(mode),
       status: mode === "tambah" ? "tambah saldo" : "tarik saldo"
     });
 
