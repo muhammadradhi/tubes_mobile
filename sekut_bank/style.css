@@ -208,19 +208,24 @@ tbody tr:hover {
   background: #f4fde9;
 }
 
-th:first-child,
-td:first-child {
-  width: 30%;
+th:nth-child(1),
+td:nth-child(1) {
+  width: 20%;
 }
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 40%;
+  width: 25%;
 }
 
-th:last-child,
-td:last-child {
-  width: 30%;
+th:nth-child(3),
+td:nth-child(3) {
+  width: 32%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 23%;
 }
 
 .badge {
